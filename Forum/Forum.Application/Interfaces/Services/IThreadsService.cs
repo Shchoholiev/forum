@@ -11,9 +11,9 @@ namespace Forum.Application.Interfaces.Services
 
         Task UpdateAsync(Thread thread);
 
-        Task DeleteAsync(ObjectId id);
+        Task DeleteAsync(string id);
 
-        Task<Thread> GetOneAsync(ObjectId id);
+        Task<Thread> GetOneAsync(string id);
 
         Task<PagedList<Thread>> GetPageAsync(PageParameters pageParameters);
 

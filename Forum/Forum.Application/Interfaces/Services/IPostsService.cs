@@ -11,11 +11,11 @@ namespace Forum.Application.Interfaces.Services
 
         Task UpdateAsync(Thread thread);
 
-        Task DeleteAsync(ObjectId id);
+        Task DeleteAsync(string id);
 
-        Task<PagedList<Thread>> GetPageAsync(PageParameters pageParameters);
+        Task<PagedList<Thread>> GetPageAsync(PageParameters pageParameters, string threadId);
 
-        Task<PagedList<Thread>> GetPageAsync(PageParameters pageParameters,
+        Task<PagedList<Thread>> GetPageAsync(PageParameters pageParameters, string threadId,
                                              Expression<Func<Thread, bool>> predicate);
     }
 }
