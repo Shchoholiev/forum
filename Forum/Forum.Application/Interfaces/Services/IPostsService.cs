@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace Forum.Application.Interfaces.Services
 {
-    public interface IThreadsServices
+    public interface IPostsService
     {
         Task AddAsync(Thread thread);
 
