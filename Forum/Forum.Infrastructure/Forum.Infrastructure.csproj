@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="NLog.Extensions.Logging" Version="5.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Forum.Application\Forum.Application.csproj" />
     <ProjectReference Include="..\Forum.Domain\Forum.Domain.csproj" />
   </ItemGroup>
