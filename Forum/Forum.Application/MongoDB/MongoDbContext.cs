@@ -15,6 +15,6 @@ namespace Forum.Application.MongoDB
             this._db = this._client.GetDatabase(configuration.GetValue<string>("MongoDatabaseName"));
         }
 
-        public IMongoDatabase Db { get => this._db; }
+        public IMongoDatabase Db => this._db; 
     }
 }
