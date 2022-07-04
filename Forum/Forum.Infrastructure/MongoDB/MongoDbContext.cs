@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using MongoDB.Driver;
 
-namespace Forum.Application.MongoDB
+namespace Forum.Infrastructure.MongoDB
 {
     public class MongoDbContext
     {
