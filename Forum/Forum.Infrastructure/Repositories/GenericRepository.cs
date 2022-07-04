@@ -45,6 +45,11 @@ namespace Forum.Infrastructure.Repositories
             return await (await this._collection.FindAsync(filter)).FirstOrDefaultAsync();
         }
 
+        public async Task<TEntity> GetOneAsync(FilterDefinition<TEntity> filter)
+        {
+            return await (await this._collection.FindAsync(filter)).FirstOrDefaultAsync();
+        }
+
         public async Task<PagedList<TEntity>> GetPageAsync(PageParameters pageParameters)
         {
             var emptyFilter = Builders<TEntity>.Filter.Empty;
@@ -57,10 +62,9 @@ namespace Forum.Infrastructure.Repositories
             return new PagedList<TEntity>(entities, pageParameters, totalCount);
         }
 
-        public async Task<PagedList<TEntity>> GetPageAsync(PageParameters pageParameters, 
-                                                           Expression<Func<TEntity, bool>> predicate)
+        public async Task<PagedList<TEntity>> GetPageAsync(PageParameters pageParameters,
+                                                           FilterDefinition<TEntity> filter)
         {
-            var filter = Builders<TEntity>.Filter.Where(predicate);
             var entities = await this._collection.Find(filter)
                                                  .Skip((pageParameters.PageNumber - 1) * pageParameters.PageSize)
                                                  .Limit(pageParameters.PageSize)
