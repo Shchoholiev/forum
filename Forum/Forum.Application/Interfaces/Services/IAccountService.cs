@@ -5,7 +5,7 @@ namespace Forum.Application.Interfaces.Services
 {
     public interface IAccountService
     {
-        Task<User> GetUser(string email);
+        Task<User> GetUserAsync(string email);
 
         Task<TokensModel> RegisterAsync(RegisterModel register);
 

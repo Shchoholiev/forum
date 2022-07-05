@@ -26,7 +26,7 @@ namespace Forum.Infrastructure.Repositories
             await this._collection.InsertOneAsync(entity);
         }
 
-        public async Task DeleteAsync(ObjectId id)
+        public async Task DeleteAsync(string id)
         {
             var filter = Builders<TEntity>.Filter.Eq(e => e.Id, id);
             await this._collection.DeleteOneAsync(filter);
@@ -38,7 +38,7 @@ namespace Forum.Infrastructure.Repositories
             await this._collection.ReplaceOneAsync(filter, entity);
         }
 
-        public async Task<TEntity> GetOneAsync(ObjectId id)
+        public async Task<TEntity> GetOneAsync(string id)
         {
             var filter = Builders<TEntity>.Filter.Eq(e => e.Id, id);
             return await (await this._collection.FindAsync(filter)).FirstOrDefaultAsync();

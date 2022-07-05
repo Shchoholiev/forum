@@ -84,10 +84,18 @@ namespace Forum.Infrastructure.DataInitilalizer
             var random = new Random();
             for (int i = 100; i >= 0; i--)
             {
+                var replyTo = (random.Next(1, 3) == 1)
+                                ? await postsCollection.AsQueryable().Sample(1).FirstOrDefaultAsync()
+                                : null;
+                if (replyTo != null)
+                {
+                    replyTo.RepliedTo = null;
+                }
+
                 var post = new Post
                 {
                     Text = LoremIpsum.GenerateText(),
-                    Author = random.Next(1, 3) switch
+                    Author = random.Next(1, 4) switch
                     {
                         1 => rick,
                         2 => joe,
@@ -96,9 +104,7 @@ namespace Forum.Infrastructure.DataInitilalizer
                     Likes = random.Next(0, 50),
                     DatePosted = DateTime.Now.AddHours(-i),
                     ThreadId = multiplayer.Id,
-                    RepliedTo = (random.Next(1,2) == 1) 
-                                ? await postsCollection.AsQueryable().Sample(1).FirstOrDefaultAsync()
-                                : null,
+                    RepliedTo = replyTo,
                 };
 
                 await postsCollection.InsertOneAsync(post);
@@ -106,10 +112,18 @@ namespace Forum.Infrastructure.DataInitilalizer
 
             for (int i = 100; i >= 0; i--)
             {
+                var replyTo = (random.Next(1, 3) == 1)
+                                ? await postsCollection.AsQueryable().Sample(1).FirstOrDefaultAsync()
+                                : null;
+                if (replyTo != null)
+                {
+                    replyTo.RepliedTo = null;
+                }
+
                 var post = new Post
                 {
                     Text = LoremIpsum.GenerateText(),
-                    Author = random.Next(1, 3) switch
+                    Author = random.Next(1, 4) switch
                     {
                         1 => rick,
                         2 => joe,
@@ -118,10 +132,7 @@ namespace Forum.Infrastructure.DataInitilalizer
                     Likes = random.Next(0, 50),
                     DatePosted = DateTime.Now.AddHours(-i),
                     ThreadId = bestBook.Id,
-                    RepliedTo = (random.Next(1, 2) == 1)
-                                ? await postsCollection.AsQueryable().Where(p => p.ThreadId == bestBook.Id)
-                                                       .Sample(1).FirstOrDefaultAsync()
-                                : null,
+                    RepliedTo = replyTo,
                 };
 
                 await postsCollection.InsertOneAsync(post);

@@ -12,9 +12,9 @@ namespace Forum.Application.Interfaces.Repositories
 
         Task UpdateAsync(TEntity entity);
 
-        Task DeleteAsync(ObjectId id);
+        Task DeleteAsync(string id);
 
-        Task<TEntity> GetOneAsync(ObjectId id);
+        Task<TEntity> GetOneAsync(string id);
 
         Task<TEntity> GetOneAsync(FilterDefinition<TEntity> filter);
 

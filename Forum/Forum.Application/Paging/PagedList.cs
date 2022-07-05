@@ -2,7 +2,7 @@
 
 namespace EducationalPortal.Application.Paging
 {
-    public class PagedList<T> : List<T>
+    public class PagedList<T> : List<T>, IPagedList
     {
         public int PageNumber { get; set; }
 
