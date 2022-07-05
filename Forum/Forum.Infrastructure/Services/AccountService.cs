@@ -44,7 +44,7 @@ namespace Forum.Infrastructure.Services
             return tokens;
         }
 
-        public async Task<User> GetUser(string email)
+        public async Task<User> GetUserAsync(string email)
         {
             var filter = Builders<User>.Filter.Eq(u => u.Email, email);
             return await this._usersRepository.GetOneAsync(filter);
