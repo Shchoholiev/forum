@@ -28,15 +28,26 @@ namespace Forum.Infrastructure.Services
             this._logger.LogInformation($"Added post with id: {post.Id}.");
         }
 
-        public async Task DeleteAsync(string id)
+        public async Task DeleteAsync(string id, string userEmail)
         {
-            await this._postsRepository.DeleteAsync(ObjectId.Parse(id));
+            var post = await this._postsRepository.GetOneAsync(ObjectId.Parse(id));
+            if (post.Author.Email != userEmail)
+            {
+                throw new InvalidDataException("You are not an author of this post!");
+            }
+
+            await this._postsRepository.DeleteAsync(post.Id);
 
             this._logger.LogInformation($"Deleted post with id: {id}.");
         }
 
-        public async Task UpdateAsync(Post post)
+        public async Task UpdateAsync(Post post, string userEmail)
         {
+            if (post.Author.Email != userEmail)
+            {
+                throw new InvalidDataException("You are not an author of this post!");
+            }
+
             await this._postsRepository.UpdateAsync(post);
 
             this._logger.LogInformation($"Updated post with id: {post.Id}.");
