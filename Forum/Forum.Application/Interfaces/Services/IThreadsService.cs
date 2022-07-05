@@ -1,7 +1,7 @@
 ﻿using EducationalPortal.Application.Paging;
 using Forum.Application.Paging;
-using MongoDB.Bson;
 using System.Linq.Expressions;
+using Thread = Forum.Domain.Entities.Thread;
 
 namespace Forum.Application.Interfaces.Services
 {
@@ -11,13 +11,10 @@ namespace Forum.Application.Interfaces.Services
 
         Task UpdateAsync(Thread thread);
 
-        Task DeleteAsync(ObjectId id);
+        Task DeleteAsync(string id);
 
-        Task<Thread> GetOneAsync(ObjectId id);
+        Task<Thread> GetOneAsync(string id);
 
         Task<PagedList<Thread>> GetPageAsync(PageParameters pageParameters);
-
-        Task<PagedList<Thread>> GetPageAsync(PageParameters pageParameters,
-                                             Expression<Func<Thread, bool>> predicate);
     }
 }
