@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Routing;
 using System.Text.RegularExpressions;
 
-namespace EducationalPortal.API.Config
+namespace Forum.Application.Helpers
 {
     public class ToKebabRouteTransformer : IOutboundParameterTransformer
     {
