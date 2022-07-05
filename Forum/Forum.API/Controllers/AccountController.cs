@@ -1,11 +1,10 @@
-﻿using Forum.API.Controllers;
-using Forum.Application.Interfaces.Services;
+﻿using Forum.Application.Interfaces.Services;
 using Forum.Application.Models;
 using Forum.Domain.Entities.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace EducationalPortal.API.Controllers
+namespace Forum.API.Controllers
 {
     [Authorize]
     public class AccountController : ApiControllerBase
