@@ -1,21 +1,18 @@
 ﻿using EducationalPortal.Application.Paging;
 using Forum.Application.Paging;
-using MongoDB.Bson;
+using Forum.Domain.Entities;
 using System.Linq.Expressions;
 
 namespace Forum.Application.Interfaces.Services
 {
     public interface IPostsService
     {
-        Task AddAsync(Thread thread);
+        Task AddAsync(Post post);
 
-        Task UpdateAsync(Thread thread);
+        Task UpdateAsync(Post post);
 
         Task DeleteAsync(string id);
 
-        Task<PagedList<Thread>> GetPageAsync(PageParameters pageParameters, string threadId);
-
-        Task<PagedList<Thread>> GetPageAsync(PageParameters pageParameters, string threadId,
-                                             Expression<Func<Thread, bool>> predicate);
+        Task<PagedList<Post>> GetPageAsync(PageParameters pageParameters, string threadId);
     }
 }

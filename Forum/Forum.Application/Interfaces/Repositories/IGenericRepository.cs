@@ -18,9 +18,9 @@ namespace Forum.Application.Interfaces.Repositories
 
         Task<TEntity> GetOneAsync(FilterDefinition<TEntity> filter);
 
-        Task<PagedList<TEntity>> GetPageAsync(PageParameters pageParameters);
+        Task<PagedList<TEntity>> GetPageAsync(PageParameters pageParameters, SortDefinition<TEntity> sort);
 
-        Task<PagedList<TEntity>> GetPageAsync(PageParameters pageParameters,
-                                              FilterDefinition<TEntity> filter);
+        Task<PagedList<TEntity>> GetPageAsync(PageParameters pageParameters, FilterDefinition<TEntity> filter,
+                                              SortDefinition<TEntity> sort);
     }
 }

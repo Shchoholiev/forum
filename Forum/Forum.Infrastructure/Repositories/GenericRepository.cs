@@ -49,10 +49,12 @@ namespace Forum.Infrastructure.Repositories
             return await (await this._collection.FindAsync(filter)).FirstOrDefaultAsync();
         }
 
-        public async Task<PagedList<TEntity>> GetPageAsync(PageParameters pageParameters)
+        public async Task<PagedList<TEntity>> GetPageAsync(PageParameters pageParameters,
+                                                           SortDefinition<TEntity> sort)
         {
             var emptyFilter = Builders<TEntity>.Filter.Empty;
             var entities = await this._collection.Find(emptyFilter)
+                                                 .Sort(sort)
                                                  .Skip((pageParameters.PageNumber - 1) * pageParameters.PageSize)
                                                  .Limit(pageParameters.PageSize)
                                                  .ToListAsync();
@@ -62,9 +64,11 @@ namespace Forum.Infrastructure.Repositories
         }
 
         public async Task<PagedList<TEntity>> GetPageAsync(PageParameters pageParameters,
-                                                           FilterDefinition<TEntity> filter)
+                                                           FilterDefinition<TEntity> filter,
+                                                           SortDefinition<TEntity> sort)
         {
             var entities = await this._collection.Find(filter)
+                                                 .Sort(sort)
                                                  .Skip((pageParameters.PageNumber - 1) * pageParameters.PageSize)
                                                  .Limit(pageParameters.PageSize)
                                                  .ToListAsync();
