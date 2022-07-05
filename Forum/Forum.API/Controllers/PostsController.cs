@@ -1,12 +1,10 @@
 ﻿using Forum.Application.Interfaces.Services;
 using Forum.Application.Paging;
 using Forum.Domain.Entities;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Forum.API.Controllers
 {
-    [Authorize(Roles = "Creator")]
     public class PostsController : ApiControllerBase
     {
         private readonly IPostsService _postsService;

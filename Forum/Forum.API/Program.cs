@@ -1,20 +1,38 @@
+using Forum.API;
+using Forum.Infrastructure;
+using Forum.Infrastructure.DataInitilalizer;
+using Forum.Infrastructure.MongoDB;
+using Forum.Infrastructure.Services.Identity;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Services.AddJWTTokenAuthentication(builder.Configuration);
+builder.Services.ConfigureControllers();
+builder.Services.ConfigureCORS();
+builder.Services.AddInfrastructure();
+builder.Services.AddServices();
+builder.Logging.AddLogger(builder.Configuration);
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    //var scope = app.Services.CreateScope();
+    //var context = scope.ServiceProvider.GetRequiredService<MongoDbContext>();
+    //var logger = scope.ServiceProvider.GetRequiredService<ILogger<PasswordHasher>>();
+    //await DbInitializer.Initialize(context, logger);
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.ConfigureCustomExceptionMiddleware();
+
+app.UseRouting();
+
+app.UseCors("allowMyOrigin");
 
 app.UseHttpsRedirection();
 
