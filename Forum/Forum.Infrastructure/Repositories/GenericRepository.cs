@@ -6,7 +6,6 @@ using Forum.Domain.Common;
 using Forum.Infrastructure.MongoDB;
 using MongoDB.Bson;
 using MongoDB.Driver;
-using System.Linq.Expressions;
 
 namespace Forum.Infrastructure.Repositories
 {
