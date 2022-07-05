@@ -28,15 +28,26 @@ namespace Forum.Infrastructure.Services
             this._logger.LogInformation($"Added thread with id: {thread.Id}.");
         }
 
-        public async Task DeleteAsync(string id)
+        public async Task DeleteAsync(string id, string userEmail)
         {
-            await this._threadsRepository.DeleteAsync(ObjectId.Parse(id));
+            var thread = await this._threadsRepository.GetOneAsync(ObjectId.Parse(id));
+            if (thread.Author.Email != userEmail)
+            {
+                throw new InvalidDataException("You are not an author of this thread!");
+            }
+
+            await this._threadsRepository.DeleteAsync(thread.Id);
 
             this._logger.LogInformation($"Deleted thread with id: {id}.");
         }
 
-        public async Task UpdateAsync(Thread thread)
+        public async Task UpdateAsync(Thread thread, string userEmail)
         {
+            if (thread.Author.Email != userEmail)
+            {
+                throw new InvalidDataException("You are not an author of this thread!");
+            }
+
             await this._threadsRepository.UpdateAsync(thread);
 
             this._logger.LogInformation($"Updated thread with id: {thread.Id}.");

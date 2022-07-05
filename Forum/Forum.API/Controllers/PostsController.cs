@@ -24,6 +24,7 @@ namespace Forum.API.Controllers
             return posts;
         }
 
+        //[Authorize]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] Post post)
         {
@@ -31,7 +32,7 @@ namespace Forum.API.Controllers
             return StatusCode(201);
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(string id, [FromBody] Post post)
         {
@@ -39,7 +40,7 @@ namespace Forum.API.Controllers
             return NoContent();
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(string id)
         {

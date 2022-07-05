@@ -1,6 +1,5 @@
 ﻿using EducationalPortal.Application.Paging;
 using Forum.Application.Paging;
-using System.Linq.Expressions;
 using Thread = Forum.Domain.Entities.Thread;
 
 namespace Forum.Application.Interfaces.Services
@@ -9,9 +8,9 @@ namespace Forum.Application.Interfaces.Services
     {
         Task AddAsync(Thread thread);
 
-        Task UpdateAsync(Thread thread);
+        Task UpdateAsync(Thread thread, string userEmail);
 
-        Task DeleteAsync(string id);
+        Task DeleteAsync(string id, string userEmail);
 
         Task<Thread> GetOneAsync(string id);
 
