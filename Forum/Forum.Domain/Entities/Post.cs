@@ -1,12 +1,14 @@
 ﻿using Forum.Domain.Common;
 using Forum.Domain.Entities.Identity;
 using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace Forum.Domain.Entities
 {
     public class Post : EntityBase
     {
-        public ObjectId ThreadId { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string ThreadId { get; set; }
 
         public string Text { get; set; }
 
@@ -16,6 +18,6 @@ namespace Forum.Domain.Entities
 
         public User Author { get; set; }
 
-        public Post RepliedTo { get; set; }
+        public Post? RepliedTo { get; set; }
     }
 }

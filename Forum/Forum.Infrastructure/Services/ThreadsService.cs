@@ -30,7 +30,7 @@ namespace Forum.Infrastructure.Services
 
         public async Task DeleteAsync(string id, string userEmail)
         {
-            var thread = await this._threadsRepository.GetOneAsync(ObjectId.Parse(id));
+            var thread = await this._threadsRepository.GetOneAsync(id);
             if (thread.Author.Email != userEmail)
             {
                 throw new InvalidDataException("You are not an author of this thread!");
@@ -55,7 +55,7 @@ namespace Forum.Infrastructure.Services
 
         public async Task<Thread> GetOneAsync(string id)
         {
-            var thread = await this._threadsRepository.GetOneAsync(ObjectId.Parse(id));
+            var thread = await this._threadsRepository.GetOneAsync(id);
 
             this._logger.LogInformation($"Returned thread with id: {thread.Id} from database.");
 

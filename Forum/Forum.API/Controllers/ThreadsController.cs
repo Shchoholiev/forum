@@ -29,7 +29,7 @@ namespace Forum.API.Controllers
             return await this._threadsService.GetOneAsync(id);
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] Thread thread)
         {
@@ -37,7 +37,7 @@ namespace Forum.API.Controllers
             return CreatedAtAction("GetThread", new { id = thread.Id }, thread);
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(string id, [FromBody] Thread thread)
         {
@@ -45,7 +45,7 @@ namespace Forum.API.Controllers
             return NoContent();
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(string id)
         {

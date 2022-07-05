@@ -30,7 +30,7 @@ namespace Forum.Infrastructure.Services
 
         public async Task DeleteAsync(string id, string userEmail)
         {
-            var post = await this._postsRepository.GetOneAsync(ObjectId.Parse(id));
+            var post = await this._postsRepository.GetOneAsync(id);
             if (post.Author.Email != userEmail)
             {
                 throw new InvalidDataException("You are not an author of this post!");
@@ -55,7 +55,7 @@ namespace Forum.Infrastructure.Services
 
         public async Task<PagedList<Post>> GetPageAsync(PageParameters pageParameters, string threadId)
         {
-            var filter = Builders<Post>.Filter.Eq(p => p.ThreadId, ObjectId.Parse(threadId));
+            var filter = Builders<Post>.Filter.Eq(p => p.ThreadId, threadId);
             var sort = Builders<Post>.Sort.Descending(p => p.DatePosted);
             var posts = await this._postsRepository.GetPageAsync(pageParameters, filter, sort);
 
