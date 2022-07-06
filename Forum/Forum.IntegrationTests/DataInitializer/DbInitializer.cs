@@ -9,9 +9,9 @@ namespace Forum.IntegrationTests.DataInitializer
 {
     public static class DbInitializer
     {
-        public static async Task Initialize(MongoDbContext context, ILogger<PasswordHasher> logger)
+        public static void Initialize(MongoDbContext context, ILogger<PasswordHasher> logger)
         {
-            await context.DropDatabaseAsync();
+            context.DropDatabase();
             var db = context.Db;
 
             var usersCollection = db.GetCollection<User>("Users");
@@ -29,7 +29,7 @@ namespace Forum.IntegrationTests.DataInitializer
                 Reputation = 100,
             };
 
-            await usersCollection.InsertOneAsync(user);
+            usersCollection.InsertOne(user);
 
             var threadsCollection = db.GetCollection<Thread>("Threads");
 
@@ -42,7 +42,7 @@ namespace Forum.IntegrationTests.DataInitializer
                 DatePosted = DateTime.Now.AddDays(-10),
             };
 
-            await threadsCollection.InsertOneAsync(thread);
+            threadsCollection.InsertOne(thread);
 
             var postsCollection = db.GetCollection<Post>("Posts");
 
@@ -68,7 +68,7 @@ namespace Forum.IntegrationTests.DataInitializer
                 RepliedTo = post1,
             };
 
-            await postsCollection.InsertManyAsync(new List<Post> { post1, post2 });
+            postsCollection.InsertMany(new List<Post> { post1, post2 });
         }
     }
 }
