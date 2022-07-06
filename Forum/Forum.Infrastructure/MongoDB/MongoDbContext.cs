@@ -16,5 +16,10 @@ namespace Forum.Infrastructure.MongoDB
         }
 
         public IMongoDatabase Db => this._db; 
+
+        public async Task DropDatabaseAsync()
+        {
+            await this._client.DropDatabaseAsync(this._db.DatabaseNamespace.DatabaseName);
+        }
     }
 }
