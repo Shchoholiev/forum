@@ -9,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddJWTTokenAuthentication(builder.Configuration);
 builder.Services.ConfigureControllers();
 builder.Services.ConfigureCORS();
+builder.Services.ConfigureValidation();
 builder.Services.AddInfrastructure();
 builder.Services.AddServices();
 builder.Logging.AddLogger(builder.Configuration);
@@ -36,6 +37,7 @@ app.UseCors("allowMyOrigin");
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

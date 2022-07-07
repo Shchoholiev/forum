@@ -50,6 +50,7 @@ namespace Forum.Infrastructure.ExceptionHandling
             {
                 NotFoundException => $"{exception.Message} Refresh the page and try again.",
                 AlreadyExistsException => $"{exception.Message} Change properties or delete existing object.",
+                InvalidDataException => exception.Message,
                 _ => "Internal Server Error",
             };
 

@@ -32,7 +32,7 @@ namespace Forum.IntegrationTests
         public async Task AuthenticateAsync()
         {
             this._client.DefaultRequestHeaders.Authorization = 
-                AuthenticationHeaderValue.Parse(await GetJwtAsync());
+                new AuthenticationHeaderValue("Bearer", await GetJwtAsync());
         }
 
         private async Task<string> GetJwtAsync()

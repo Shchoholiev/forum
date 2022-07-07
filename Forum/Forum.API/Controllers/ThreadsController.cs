@@ -33,7 +33,7 @@ namespace Forum.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] Thread thread)
         {
-            await this._threadsService.AddAsync(thread);
+            await this._threadsService.AddAsync(thread, Email);
             return CreatedAtAction("GetThread", new { id = thread.Id }, thread);
         }
 

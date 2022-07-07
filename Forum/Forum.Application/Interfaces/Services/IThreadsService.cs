@@ -6,7 +6,7 @@ namespace Forum.Application.Interfaces.Services
 {
     public interface IThreadsService
     {
-        Task AddAsync(Thread thread);
+        Task AddAsync(Thread thread, string authorEmail);
 
         Task UpdateAsync(Thread thread, string userEmail);
 
