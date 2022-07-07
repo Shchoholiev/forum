@@ -3,6 +3,7 @@ using Forum.Infrastructure.MongoDB;
 using Forum.Infrastructure.Services.Identity;
 using Forum.IntegrationTests.DataInitializer;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -21,6 +22,9 @@ namespace Forum.IntegrationTests
         {
             var factory = new WebApplicationFactory<Program>().WithWebHostBuilder(builder =>
             {
+                builder.ConfigureAppConfiguration((context, config) =>
+                    config.AddJsonFile(Directory.GetCurrentDirectory() + "/appsettings.Integration.json")
+                );
             });
             this._client = factory.CreateDefaultClient();
 

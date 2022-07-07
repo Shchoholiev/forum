@@ -1,6 +1,5 @@
 ﻿using Xunit;
 using System.Net;
-using Thread = Forum.Domain.Entities.Thread;
 using Forum.Application.Models;
 using System.Text;
 using Newtonsoft.Json;
