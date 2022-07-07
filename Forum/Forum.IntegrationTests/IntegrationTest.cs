@@ -29,17 +29,17 @@ namespace Forum.IntegrationTests
             DbInitializer.Initialize(mongoContext, logger);
         }
 
-        public async Task AuthenticateAsync()
+        public async Task AuthenticateAsync(string email)
         {
             this._client.DefaultRequestHeaders.Authorization = 
-                new AuthenticationHeaderValue("Bearer", await GetJwtAsync());
+                new AuthenticationHeaderValue("Bearer", await GetJwtAsync(email));
         }
 
-        private async Task<string> GetJwtAsync()
+        private async Task<string> GetJwtAsync(string email)
         {
             var loginModel = new LoginModel 
             { 
-                Email = "integration@test",
+                Email = email,
                 Password = "integrationtest"
             };
             var json = JsonConvert.SerializeObject(loginModel);

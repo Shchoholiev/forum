@@ -29,7 +29,17 @@ namespace Forum.IntegrationTests.DataInitializer
                 Reputation = 100,
             };
 
-            usersCollection.InsertOne(user);
+            var user2 = new User
+            {
+                Id = "62c42fbf4a055cc6a3591bea",
+                Nickname = "IntegrationTest2",
+                Email = "integration@test2",
+                PasswordHash = passwordHash,
+                Bio = "Second Tester",
+                Reputation = 0,
+            };
+
+            usersCollection.InsertMany(new List<User> { user, user2 });
 
             var threadsCollection = db.GetCollection<Thread>("Threads");
 
@@ -42,7 +52,16 @@ namespace Forum.IntegrationTests.DataInitializer
                 DatePosted = DateTime.Now.AddDays(-10),
             };
 
-            threadsCollection.InsertOne(thread);
+            var threadForDelete = new Thread
+            {
+                Id = "62c42fbf4a055cc6a3591be5",
+                Name = "Delete me",
+                Rating = 204,
+                Author = user2,
+                DatePosted = DateTime.Now.AddDays(-1),
+            };
+
+            threadsCollection.InsertMany(new List<Thread> { thread, threadForDelete });
 
             var postsCollection = db.GetCollection<Post>("Posts");
 
@@ -61,7 +80,7 @@ namespace Forum.IntegrationTests.DataInitializer
             {
                 Id = "62c42fbf4a055cc6a3591bd5",
                 Text = "Unit testing is way better",
-                Author = user,
+                Author = user2,
                 Likes = 42,
                 DatePosted = DateTime.Now.AddHours(-5),
                 ThreadId = thread.Id,
