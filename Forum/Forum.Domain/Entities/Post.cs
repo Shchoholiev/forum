@@ -14,7 +14,7 @@ namespace Forum.Domain.Entities
 
         public DateTime DatePosted { get; set; }
 
-        public int Likes { get; set; }
+        public int Likes { get; set; } = 0;
 
         public User Author { get; set; }
 

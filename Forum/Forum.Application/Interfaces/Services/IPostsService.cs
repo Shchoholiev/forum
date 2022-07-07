@@ -6,7 +6,7 @@ namespace Forum.Application.Interfaces.Services
 {
     public interface IPostsService
     {
-        Task AddAsync(Post post);
+        Task AddAsync(Post post, string authorEmail);
 
         Task UpdateAsync(Post post, string userEmail);
 

@@ -16,8 +16,8 @@ namespace Forum.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Post>>> GetPage([FromQuery] PageParameters pageParameters, 
-                                                                   string threadId)
+        public async Task<ActionResult<IEnumerable<Post>>> GetPage([FromQuery] PageParameters pageParameters,
+                                                                   [FromQuery] string threadId)
         {
             var posts = await this._postsService.GetPageAsync(pageParameters, threadId);
             this.SetPagingMetadata(posts);
@@ -28,8 +28,8 @@ namespace Forum.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] Post post)
         {
-            await this._postsService.AddAsync(post);
-            return StatusCode(201);
+            await this._postsService.AddAsync(post, Email);
+            return StatusCode(201, post);
         }
 
         [Authorize]

@@ -1,5 +1,6 @@
 ﻿using Forum.Application.Helpers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
@@ -10,7 +11,7 @@ namespace Forum.API
     public static class MiddlewareConfigurations
     {
         public static IServiceCollection AddJWTTokenAuthentication(this IServiceCollection services, 
-                                                             IConfiguration configuration)
+                                                                   IConfiguration configuration)
         {
             services.AddAuthentication(options =>
             {
@@ -57,6 +58,16 @@ namespace Forum.API
                            .AllowAnyHeader()
                            .WithExposedHeaders("X-Pagination");
                 });
+            });
+
+            return services;
+        }
+
+        public static IServiceCollection ConfigureValidation(this IServiceCollection services)
+        {
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.SuppressModelStateInvalidFilter = true;
             });
 
             return services;

@@ -26,17 +26,22 @@ namespace Forum.Infrastructure.ExceptionHandling
             }
             catch (NotFoundException ex)
             {
-                this._logger.LogError($"Entity not found: {ex}");
+                this._logger.LogError($"Entity not found: {ex.Message}");
                 await HandleExceptionAsync(httpContext, ex, (int)HttpStatusCode.NotFound);
             }
             catch (AlreadyExistsException ex)
             {
-                this._logger.LogError($"Entity already exists: {ex}");
+                this._logger.LogError($"Entity already exists: {ex.Message}");
+                await HandleExceptionAsync(httpContext, ex, (int)HttpStatusCode.BadRequest);
+            }
+            catch (InvalidDataException ex)
+            {
+                this._logger.LogError($"Invalid data: {ex.Message}");
                 await HandleExceptionAsync(httpContext, ex, (int)HttpStatusCode.BadRequest);
             }
             catch (Exception ex)
             {
-                this._logger.LogError($"Something went wrong: {ex}");
+                this._logger.LogError($"Something went wrong: {ex.Message}");
                 await HandleExceptionAsync(httpContext, ex, (int)HttpStatusCode.InternalServerError);
             }
         }
@@ -50,6 +55,7 @@ namespace Forum.Infrastructure.ExceptionHandling
             {
                 NotFoundException => $"{exception.Message} Refresh the page and try again.",
                 AlreadyExistsException => $"{exception.Message} Change properties or delete existing object.",
+                InvalidDataException => $"{exception.Message} Change properties and try again.",
                 _ => "Internal Server Error",
             };
 
