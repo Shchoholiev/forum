@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.9" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.6" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Forum.Application\Forum.Application.csproj" />
+    <ProjectReference Include="..\Forum.Domain\Forum.Domain.csproj" />
+    <ProjectReference Include="..\Forum.Infrastructure\Forum.Infrastructure.csproj" />
+  </ItemGroup>
+	
+    <ItemGroup>
+     <InternalsVisibleTo Include="Forum.IntegrationTests" />
+    </ItemGroup>
+
+</Project>
